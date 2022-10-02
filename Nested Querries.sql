@@ -35,4 +35,24 @@ WHERE Client.branch_id = (
 	 )
  );
  
+ -- Find the names of employees who work with clients handled by the scranton branch
+
+ SELECT Employee.first_name, Employee.last_name
+ FROM Employee
+ WHERE Employee.emp_id IN (
+	 SELECT Works_With.emp_id
+	 FROM Works_With
+	 WHERE Works_With.client_id IN (
+		 SELECT Client.client_id
+		 FROM Client
+		 WHERE Client.branch_id = (
+			 SELECT Branch.branch_id
+			 FROM Branch
+			 WHERE Branch.branch_name = 'Scranton'
+		 )
+	 )
+ );
+ 
+
+ 
  
