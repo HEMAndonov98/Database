@@ -19,3 +19,20 @@ WHERE Client.branch_id = (
     FROM Branch
     WHERE Branch.mgr_id = 102
 );
+
+-- Find all clients who are handled by the branch that Michael Scott manages
+ -- Assume you DONT'T know Michael's ID
+ 
+ SELECT Client.client_name
+ FROM Client
+	 Where Client.branch_id = (
+	  SELECT Branch.branch_id
+	  FROM Branch
+	  Where Branch.mgr_id = (
+		SELECT Employee.emp_id
+		FROM Employee
+		WHERE Employee.first_name = 'Michael'
+	 )
+ );
+ 
+ 
