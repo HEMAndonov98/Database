@@ -8,3 +8,14 @@ WHERE Employee.emp_id IN
 	FROM Works_With
 	WHERE Works_With.total_sales > 50000
 );
+
+-- Find all clients who are handled by the branch that Michael Scott manages
+-- Assume you know Michael's ID
+
+SELECT Client.client_id, Client.client_name
+FROM Client
+WHERE Client.branch_id = (
+	SELECT Branch.branch_id
+    FROM Branch
+    WHERE Branch.mgr_id = 102
+);
