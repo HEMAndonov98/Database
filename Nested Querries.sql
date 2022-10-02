@@ -53,6 +53,14 @@ WHERE Client.branch_id = (
 	 )
  );
  
+ -- Find the names of all clients who have spent more than 100,000 dollars
+ 
+SELECT Client.client_name
+FROM Client
+WHERE Client.client_id IN (
+	SELECT Works_With.client_id
+	FROM Works_With
+    GROUP BY Works_With.client_id
+	HAVING SUM(Works_With.total_sales) > 100000
+);
 
- 
- 
